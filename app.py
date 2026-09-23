@@ -4,19 +4,15 @@ import joblib
 
 app = Flask(__name__)
 
-# Folder containing the AI model files
-BASE_DIR = r"C:\Users\Ritik Pandey\OneDrive\Desktop\New folder"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-# Load the trained model
 model = joblib.load(
     os.path.join(BASE_DIR, "improved_sms_spam_model.pkl")
 )
 
-# Load the TF-IDF features
 features = joblib.load(
     os.path.join(BASE_DIR, "improved_tfidf_features.pkl")
 )
-
 
 @app.route("/", methods=["GET", "POST"])
 def home():
