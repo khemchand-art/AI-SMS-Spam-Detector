@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI SMS Spam Detector</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<main class="container">
+<section class="card">
+<div class="badge">AI POWERED</div>
+<h1>AI SMS Spam Detector</h1>
+<p class="subtitle">Enter an SMS message and let the machine-learning model classify it.</p>
+<form method="POST">
+<label for="message">Enter your SMS</label>
+<textarea id="message" name="message" placeholder="Type or paste an SMS message here..." required>{{ message }}</textarea>
+<button type="submit">CHECK MESSAGE</button>
+</form>
+{% if result %}
+<div class="result {{ 'spam' if result == 'SPAM' else 'ham' }}">
+<div class="result-icon">{{ '⚠' if result == 'SPAM' else '✓' }}</div>
+<div>
+<div class="result-title">{{ result }}</div>
+<div class="result-text">
+{{ 'This message was classified as spam.' if result == 'SPAM' else 'This message was classified as legitimate.' }}
+</div>
+</div>
+</div>
+<div class="score">SVM decision score: <strong>{{ score }}</strong></div>
+{% endif %}
+</section>
+<footer>AI Based Real-Time SMS Spam Detection System</footer>
+</main>
+</body>
+</html>
